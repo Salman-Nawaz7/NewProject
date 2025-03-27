@@ -5,6 +5,7 @@ import { flush } from '@angular/core/testing';
 import { ProfileComponent } from './profile/profile.component';
 import { authGuard } from './auth.guard';
 import { RegisterComponent } from './register/register.component';
+import { LayoutComponent } from './layout/layout.component';
 
 export const routes: Routes = [
     {
@@ -22,12 +23,18 @@ export const routes: Routes = [
     },
     {
         path:'',
-        component:DashboardComponent,
+        component:LayoutComponent,
+        canActivate:[authGuard],
         children:[
+            {
+                path:'dashboard',
+                component:DashboardComponent,
+                
+            },
             {
                 path:'profile',
                 component:ProfileComponent,
-                canActivate:[authGuard]
+                
             }
 
         ]
