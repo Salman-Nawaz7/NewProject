@@ -78,6 +78,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
 
+    if(this.myemail!=null){
+      this.router.navigateByUrl('/dashboard');
+    }
+
     google.accounts.id.initialize({
       client_id: '59814451099-7rmuqjnobsll5pi8at1g18oqmjustefp.apps.googleusercontent.com',
       callback: (resp: any) => this.handlelogin(resp)

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { data2 } from '../interfcae/users';
 import { Router } from '@angular/router';
@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
-export class RegisterComponent {
-
+export class RegisterComponent implements OnInit {
+  myemail: any[] = JSON.parse(localStorage.getItem('myemail') || '[]');
   user: data2 = new data2();
   router = inject(Router);
 
@@ -19,6 +19,11 @@ export class RegisterComponent {
   test: any[] = JSON.parse(localStorage.getItem('users') || '[]');
   newobject: object = {};
 
+  ngOnInit(): void {
+    if(this.myemail!=null){
+      this.router.navigateByUrl('/dashboard');
+    }
+  }
   submitdata() {
     this.check = 0;
     if (this.user.email.includes('@') == true && this.user.email.endsWith('.com') && this.user.email.length > 15) {
